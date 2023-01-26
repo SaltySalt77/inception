@@ -1,0 +1,60 @@
+version: '3'
+
+volumes:
+    wordpress:
+        driver: local
+        name: wordpress
+        driver_opts:
+            type: none
+            o: bind
+            device: /Users/hyna/data/wordpress
+    db:
+        driver: local
+        name: db
+        driver_opts:
+            type: none
+            o: bind
+            device: /Users/hyna/data/mariadb
+services:
+    mariadb:
+        env_file:
+            - ./.env
+        build:
+            context: ./requirements/mariadb
+            dockerfile: ./Dockerfile
+        container_name: mariadb
+        volumes:
+            - db:/var/lib/mysql
+        restart: always
+        expose: #port와 expose 둘 다 같은 기능이나, expose는 같은 호스트 내의 컨테이너만 포트 번호로 접근 가능함
+            - "3306"
+        networks:
+            - intra
+        tty: true #커맨드가 끝나도 컨테이너가 계속 켜져있을 수 있도록 설정
+    nginx:
+        image: debian:buster
+        restart: always
+        ports:
+            - "443:443"
+        container_name: nginx
+        volumes:
+            - wordpress:/var/www/html
+        networks:
+            - intra
+        tty: true
+    wordpress:
+        build:
+            context: ./requirements/wordpress
+            dockerfile: ./Dockerfile
+        container_name: wordpress
+        volumes:
+            - wordpress:/var/www/html
+        restart: always
+        expose:
+            - "9000"
+        networks:
+            - intra
+        tty: true
+networks:
+    intra:
+        driver: bridge
