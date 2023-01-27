@@ -2,5 +2,4 @@
 
 set-x
 service mysql start
-
 bash
