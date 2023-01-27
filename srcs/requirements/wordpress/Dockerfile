@@ -2,7 +2,6 @@ FROM debian:buster
 
 COPY ./tools/.setting.sh /root/.setting.sh
 COPY ./tools/start.sh /root/start.sh
-COPY ./conf/host_ip.txt /root/host_ip.txt
 
 RUN set -x && \
 apt-get update -y && \
@@ -18,9 +17,14 @@ apt-get -y install php-mbstring && \
 apt-get -y install php-xml && \
 apt-get -y install sendmail
 
+
+RUN sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/\
+listen = 0.0.0.0:9000/g' \
+/etc/php/7.3/fpm/pool.d/www.conf
+
 # RUN set -x && \
 # bash ~/.setting.sh
 
-# RUN cat ~/host_ip.txt | bash ~/start.sh
+RUN service php7.3-fpm start
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["bash", "/root/start.sh"]

@@ -23,6 +23,7 @@ services:
             context: ./requirements/mariadb
             dockerfile: ./Dockerfile
         container_name: mariadb
+        hostname: database
         volumes:
             - db:/var/lib/mysql
         restart: always
@@ -47,6 +48,7 @@ services:
             context: ./requirements/wordpress
             dockerfile: ./Dockerfile
         container_name: wordpress
+        hostname: webpage
         volumes:
             - wordpress:/var/www/html
         restart: always
