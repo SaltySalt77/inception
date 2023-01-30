@@ -11,6 +11,8 @@ all :
 
 clean :
 	docker-compose $(FILE) down
+	@docker volume rm db 2> /dev/null || true
+	@docker volume rm wordpress 2> /dev/null || true
 
 re :
 	@${MAKE} clean
