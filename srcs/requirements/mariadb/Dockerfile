@@ -1,16 +1,12 @@
 FROM debian:buster
 
-COPY ./tools/.start_mysql.sh ~/.start.sh
-
-RUN set -x && \
-apt-get update -y && \
-apt-get upgrade -y && \
-apt-get install -y mariadb-server && \
-sed -i 's/bind-address            = 127.0.0.1/bind-address            \
-= 0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf && \
-service mysql start
+RUN  apt-get update && apt-get install -y mariadb-server
 
 EXPOSE 3306
 
-ENTRYPOINT ["bash", "~/.start.sh"]
-# ENTRYPOINT ["service", "mysql", "start"]
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY ./tools /var/www
+
+RUN service mysql start && mysql < /var/www/initial_db.sql && rm -f /var/www/initial_db.sql;
+
+CMD ["mysqld"]
