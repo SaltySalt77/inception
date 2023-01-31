@@ -2,7 +2,6 @@ FROM debian:buster
 
 COPY ./tools/.ssl.sh /root/.ssl.sh
 COPY ./conf/default /root/default
-COPY ./tools/start.sh /root/start.sh
 
 RUN set -x && \
 apt-get update -y && \
@@ -15,8 +14,8 @@ bash /root/.ssl.sh && \
 rm /root/.ssl.sh
 
 RUN set -x && \
-mv /root/default /etc/nginx/sites-available/default
+mv /root/default /etc/nginx/sites-available/default && \
+echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+chown -R www-data:www-data /var/lib/nginx
 
-RUN bash /root/start.sh
-
-ENTRYPOINT [ "bash", "/root/start.sh" ]
+CMD [ "nginx" ]

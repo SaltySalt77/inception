@@ -38,7 +38,7 @@ services:
             context: ./requirements/nginx
             dockerfile: ./Dockerfile
         container_name: nginx
-        hostname: webserver
+        hostname: nginx
         volumes:
             - vol-wordpress:/var/www/html
         restart: always
@@ -54,7 +54,7 @@ services:
             context: ./requirements/wordpress
             dockerfile: ./Dockerfile
         container_name: wordpress
-        hostname: webpage
+        hostname: wordpress
         volumes:
             - vol-wordpress:/var/www/html
         restart: always
