@@ -4,6 +4,9 @@ all :
 	docker-compose $(FILE) up --build -d
 
 clean :
+	docker-compose $(FILE) down
+
+fclean :
 	docker-compose $(FILE) down -v
 
 cache :
