@@ -1,2 +1,2 @@
 service nginx start
-bash
+exec nginx

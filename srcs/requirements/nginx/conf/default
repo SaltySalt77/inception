@@ -22,8 +22,11 @@ server {
 
 	# SSL configuration
 	#
-	listen 443 ssl default_server;
-	listen [::]:443 ssl default_server;
+	listen 443 ssl;
+	ssl_protocols  TLSv1.2 TLSv1.3;
+
+	ssl_certificate /etc/ssl/certs/server.crt;
+	ssl_certificate_key /etc/ssl/private/server_pkey.pem;
 	#
 	# Note: You should disable gzip for SSL traffic.
 	# See: https://bugs.debian.org/773332
@@ -39,8 +42,8 @@ server {
 	root /var/www/html;
 
 	# Add index.php to the list if you are using PHP
-	index index.html index.htm index.nginx-debian.html index.php;
-
+	index index.htm index.php;
+	# index.nginx-debian.html index.html
 	server_name _;
 
 	location / {

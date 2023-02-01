@@ -1,6 +1,7 @@
 FROM debian:buster
 
 COPY ./tools/.ssl.sh /root/.ssl.sh
+COPY ./tools/start.sh /root/start.sh
 COPY ./conf/default /root/default
 
 RUN set -x && \
@@ -18,4 +19,4 @@ mv /root/default /etc/nginx/sites-available/default && \
 echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
 chown -R www-data:www-data /var/lib/nginx
 
-CMD [ "nginx" ]
+CMD [ "bash", "/root/start.sh" ]

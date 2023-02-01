@@ -1,6 +1,5 @@
 FROM debian:buster
 
-COPY ./tools/.setting.sh /root/.setting.sh
 COPY ./tools/start.sh /root/start.sh
 
 RUN set -x && \
@@ -18,7 +17,7 @@ apt-get install -y php-xml && \
 apt-get install -y sendmail &&\
 apt-get install -y sudo
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/wordpress
 
 RUN sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/\
 listen = 0.0.0.0:9000/g' \
