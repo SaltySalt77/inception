@@ -1,16 +1,16 @@
 version: '3'
 
 volumes:
-    vol-wordpress:
+    vol_wordpress:
         driver: local
-        name: vol-wordpress
+        name: vol_wordpress
         driver_opts:
             type: none
             o: bind
             device: /Users/hyna/data/wordpress
-    vol-db:
+    vol_database:
         driver: local
-        name: vol-db
+        name: vol_database
         driver_opts:
             type: none
             o: bind
@@ -25,7 +25,7 @@ services:
         container_name: mariadb
         hostname: mariadb
         volumes:
-            - vol-db:/var/lib/mysql
+            - vol_database:/var/lib/mysql
         restart: always
         expose: #port와 expose 둘 다 같은 기능이나, expose는 같은 호스트 내의 컨테이너만 포트 번호로 접근 가능함
             - "3306"
@@ -40,7 +40,7 @@ services:
         container_name: nginx
         hostname: nginx
         volumes:
-            - vol-wordpress:/var/www/html
+            - vol_wordpress:/var/www/html
         restart: always
         ports:
             - "443:443"
@@ -56,7 +56,7 @@ services:
         container_name: wordpress
         hostname: wordpress
         volumes:
-            - vol-wordpress:/var/www/html
+            - vol_wordpress:/var/www/html
         restart: always
         expose:
             - "9000"
