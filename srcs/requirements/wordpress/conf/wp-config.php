@@ -29,7 +29,7 @@ define( 'DB_USER', 'hyna' );
 define( 'DB_PASSWORD', 'psswd1234_' );
 
 /** Database hostname */
-define( 'DB_HOST', 'database' );
+define( 'DB_HOST', 'mariadb' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );

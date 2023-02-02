@@ -17,8 +17,6 @@ volumes:
             device: /Users/hyna/data/mariadb
 services:
     mariadb:
-        env_file:
-            - ./.env
         build:
             context: ./requirements/mariadb
             dockerfile: ./Dockerfile
