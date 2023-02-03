@@ -23,8 +23,8 @@ server {
 	# SSL configuration
 	#
 	listen 443 ssl;
-	ssl_protocols  TLSv1.2 TLSv1.3;
 
+	ssl_protocols  TLSv1.2 TLSv1.3;
 	ssl_certificate /etc/ssl/certs/server.crt;
 	ssl_certificate_key /etc/ssl/private/server_pkey.pem;
 	#
@@ -62,6 +62,7 @@ server {
 		# With php-cgi (or other tcp sockets):
 		fastcgi_pass wordpress:9000;
 	}
+	error_page 497 https://hyna.42.fr;
 
 	# deny access to .htaccess files, if Apache's document root
 	# concurs with nginx's one
