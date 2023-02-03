@@ -22,9 +22,8 @@ echo "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_USER_
 echo "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';" >> /root/init_db.sql ; \
 echo "FLUSH PRIVILEGES;" >> /root/init_db.sql ; \
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" >> /root/init_db.sql ; \
-mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "source /root/init_db.sql;" || echo "alert!!!!" > /root/test.txt
-# chmod +x /root/start.sh && \
-# bash /root/start.sh
+mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "source /root/init_db.sql;" && \
+rm /root/init_db.sql
 
 EXPOSE 3306
 
