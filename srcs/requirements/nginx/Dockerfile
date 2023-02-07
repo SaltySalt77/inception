@@ -1,4 +1,4 @@
-FROM debian:11.5
+FROM debian:buster
 
 COPY ./tools/.ssl.sh /root/.ssl.sh
 COPY ./tools/start.sh /root/start.sh

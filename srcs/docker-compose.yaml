@@ -3,18 +3,16 @@ version: '3'
 volumes:
     vol_wordpress:
         driver: local
-        name: vol_wordpress
         driver_opts:
             type: none
             o: bind
-            device: /Users/hyna/data/wordpress
+            device: /home/hyna/data/wordpress
     vol_database:
         driver: local
-        name: vol_database
         driver_opts:
             type: none
             o: bind
-            device: /Users/hyna/data/mariadb
+            device: /home/hyna/data/mariadb
 services:
     mariadb:
         build:

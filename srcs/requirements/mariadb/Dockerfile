@@ -1,4 +1,4 @@
-FROM debian:11.5
+FROM debian:buster
 
 RUN set -x && \
 apt-get update && \
