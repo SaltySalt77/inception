@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:11.5
 
 RUN set -x && \
 apt-get update && \
@@ -6,7 +6,6 @@ apt-get upgrade -y && \
 apt-get install -y mariadb-server
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY ./tools/start.sh /root/start.sh
 
 ENV MYSQL_ROOT_PASSWORD=psswd1234_
 ENV MYSQL_DATABASE=wordpress_db

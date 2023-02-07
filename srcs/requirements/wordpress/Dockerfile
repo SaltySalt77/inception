@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:11.5
 
 COPY ./tools/start.sh /root/start.sh
 
